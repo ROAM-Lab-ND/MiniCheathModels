@@ -6,7 +6,6 @@
 %% get function hanldes
 params = getMiniCheetahParams();
 
-%% 
 
 robot = buildTreeModel(params);
 
