@@ -9,6 +9,6 @@ This package incorporates a few models (full-order and reduced-order) of the MIT
 - Functions to quickly generate C++ interfaces, including forward kinematics, dynamics, and first-order dynamics derivatives (using automatic differentiation)
 
 ### Dependencies
-- [spatial_v2_extended](https://github.com/ROAM-Lab-ND/spatial_v2_extended)
+- [spatial_v2_extended](https://github.com/ROAM-Lab-ND/spatial_v2_extended)(**branch: CasADiConflictFree**)
 - [Casadi](https://web.casadi.org/get/)
 - [Robotics System Toolbox](https://www.mathworks.com/products/robotics.html)(optional for the visulization )
