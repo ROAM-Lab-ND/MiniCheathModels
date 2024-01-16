@@ -1,12 +1,17 @@
-function SRBFuncs = DynamicsSupportAngularVel(SRB_param)
+function SRBFuncs = DynamicsSupportAngularVel_Kino(SRB_param)
 % Generate mex function for kinodynamics which represents orientation using
 % ZYX Euler angle reprsentation. Don't mess up with XYZ fixed-anlge.
 import casadi.*
+error("This version of KSRB dynamics was not fully developed!");
 
 I = SRB_param.RotInertia; % Mini Cheetah body inertia
 m = SRB_param.mass;
 g = 9.81;
 
+% mode selection
+% Free              : All forces and velocity directly applied on the torso
+% Hybrid_Redundant  : Forces apply when feet in stance and vel in flight
+% Hybrid_Compact    : U acts as force in stance and vel in flight
 %% Symbolic setup using Casadi
 eul = SX.sym('eul', [3, 1]);
 p = SX.sym('p', [3, 1]);
@@ -16,6 +21,8 @@ pf = SX.sym('pf', [12, 1]);         % foothold location in world frame
 
 F = SX.sym('F', [12, 1]);       % GRF in global frame
 c = SX.sym('c', [4, 1]);        % contact status
+
+vf = SX.sym('vf', [12, 1]);           % Foot velocity in global frame
 
 %% Dynamicsz
 R_body = eul2Rot(eul);        % orientation of body w.r.t. global frame
@@ -34,18 +41,19 @@ vdot = g_world + Ft/m;
 
 
 %% Continuous-time dynamics
-x = [p; eul; v; w];       % state variable
+x = [p; eul; v; w; pf];       % state variable
 xdot = [pdot;
         euldot;        
         vdot;
-        wdot];
-u = F;                  % control variable
+        wdot;
+        vf];
+u = [F;vf];                  % control variable
 Ac = jacobian(xdot, x);
 Bc = jacobian(xdot, u);
 
 % Generate function handle using Casadi
-Dynamics = Function('SRBDynamics',{x, u, pf, c}, {xdot});
-DynamicsDerivatives = Function('SRBDynamicsDerivatives',{x, u, pf, c},{Ac,Bc});
+Dynamics = Function('KinoSRBDynamics',{x, u, c}, {xdot});
+DynamicsDerivatives = Function('KinoSRBDynamicsDerivatives',{x, u, c},{Ac,Bc});
 
 SRBFuncs.Dynamics = Dynamics;
 SRBFuncs.DynamicsDerivatives = DynamicsDerivatives;
