@@ -6,7 +6,7 @@ qJ = [0, -pi/2, 0, 0, -pi/2, 0, 0, pi/2, 0, 0, pi/2, 0]';
 q = [qB; qJ];
 SRB_param = computeSRBDInertia(robot_tree, q);
 % SRB_param = compute_SRBD_inertia(mc_param);
-SRBFuncs = DynamicsSupportEulrate(SRB_param);
+SRBFuncs = SRBDynamicsSupportEulrate(SRB_param);
 
 %% Check with finite difference
 pos = rand(3,1);
