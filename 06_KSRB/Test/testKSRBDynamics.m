@@ -1,6 +1,3 @@
-addpath(genpath('./'));
-% addpath(genpath("../../spatial_v2_extended"));
-addpath('/Users/luan/Documents/casadi-3.6.3-osx64-matlab2018b/', '-end');
 
 %% Physical parameter of float base setup
 mc_param = getMiniCheetahParams();
