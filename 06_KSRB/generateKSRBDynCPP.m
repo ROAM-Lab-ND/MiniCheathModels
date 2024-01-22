@@ -1,4 +1,4 @@
-
+currentFilePath = fileparts(mfilename('fullpath'));
 %% Physical parameter of float base setup
 mc_param = getMiniCheetahParams();
 robot_tree = buildTreeModelWithRotor(mc_param);
@@ -19,7 +19,7 @@ for i = 1:3
     config.xsize = SRBFuncs.xlength;
     config.usize = SRBFuncs.ulength;
     config.ysize = SRBFuncs.ylength;
-    save("06_KSRB/DynamicsMex/KSRBconfig_"+names(i),"config");
+    save(currentFilePath+"/DynamicsMex/KSRBconfig_"+names(i),"config");
 
     %% Generate CPP files
     import casadi.*;
@@ -41,9 +41,10 @@ for i = 1:3
     
     mex('-largeArrayDims', cpp_name);
     
-    movefile *.cpp  06_KSRB/CPP
-    movefile *.h    06_KSRB/CPP
-    movefile *.mex* 06_KSRB/DynamicsMex
+    movefile('*.cpp', currentFilePath+"/CPP");
+    movefile('*.h', currentFilePath+"/CPP");
+    movefile('*.mex*', currentFilePath+"/DynamicsMex");
+
 end
 
 

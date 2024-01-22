@@ -1,4 +1,4 @@
-
+currentFilePath = fileparts(mfilename('fullpath'));
 %% get function hanldes
 params = getMiniCheetahParams();
 robot = buildTreeModel(params);
@@ -15,5 +15,5 @@ c.add(kinFuncs.footAccPartialDq);
 c.add(kinFuncs.footAccPartialDv);
 c.add(kinFuncs.footForcePartialDq);
 c.generate();
-movefile *.cpp 04_WB/CPP
-movefile *.h 04_WB/CPP
+movefile('*.cpp', currentFilePath+"/CPP");
+movefile('*.h', currentFilePath+"/CPP");

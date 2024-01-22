@@ -1,3 +1,4 @@
+currentFilePath = fileparts(mfilename('fullpath'));
 %% Physical parameter of float base setup
 % Build a tree model using mini cheath parameters
 mc_param = getMiniCheetahParams();
@@ -19,7 +20,7 @@ c = CodeGenerator('SRBDynamics.cpp',gen_params);
 c.add(SRBFuncs.Dynamics);
 c.add(SRBFuncs.DynamicsDerivatives);
 c.generate();
-movefile *.cpp 05_SRB/CPP
-movefile *.h 05_SRB/CPP
+movefile('*.cpp', currentFilePath+"/CPP");
+movefile('*.h', currentFilePath+"/CPP");
 
 % SRBFuncs.Dynamics.generate('test.cpp');
