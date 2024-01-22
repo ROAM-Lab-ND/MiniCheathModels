@@ -20,6 +20,7 @@ for i = 1:3
     config.usize = SRBFuncs.ulength;
     config.ysize = SRBFuncs.ylength;
     save(currentFilePath+"/DynamicsMex/KSRBconfig_"+names(i),"config");
+    save(currentFilePath+"/DynamicsMex/KSRBfuncs_"+names(i),"SRBFuncs");
 
     %% Generate CPP files
     import casadi.*;
