@@ -1,4 +1,4 @@
-function funcs = DynamicsSupport(robot)
+function funcs = WBDynamicsSupport(robot)
 import casadi.*
 
 pos = SX.sym('p', [3, 1]);
@@ -75,7 +75,9 @@ end
 qdd_fly = H\(S*u - C);
 freeDynamics = Function('freeDyn', {q,qd,u}, {qdd_fly});
 % freeDynamicsPartial = Function('freeDynPartial', {q,qd,u},{jacobian(f_fly, q)});
+massAndNonlinearTerms = Function('massAndNle',{q, qd}, {H, C});
 
 funcs.dynamics.contact = contactDynamics;
 funcs.dynamics.free = freeDynamics;
+funcs.massAndNle = massAndNonlinearTerms;
 end

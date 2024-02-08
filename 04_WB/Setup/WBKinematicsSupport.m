@@ -1,4 +1,4 @@
-function kin = KinematicsSupport(robot)
+function kin = WBKinematicsSupport(robot)
 import casadi.*
 
 pos = SX.sym('p', [3, 1]);
@@ -18,7 +18,7 @@ for foot = 1:4
     J{foot} = computeFootJacobian(robot, q, foot);
     Jd{foot} = reshape(jacobian(reshape(J{foot}, [numel(J{foot}),1]),q)*qd, 3, robot.NB);
 end
-footJacobian = Function('footJacobDerivative', {q}, J);
+footJacobian = Function('footJacobian', {q}, J);
 footJacobianPartial = Function('footJacobDerivative', {q, qd}, Jd);
 
 %% Jacobian of foot accleration w.r.t. q in world frame
