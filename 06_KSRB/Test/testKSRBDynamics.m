@@ -8,9 +8,12 @@ q = [qB; qJ];
 SRB_param = computeSRBDInertia(robot_tree, q);
 % SRB_param = compute_SRBD_inertia(mc_param);
 SRB_param.abadLoc = mc_param.abadLoc;
-SRBFuncs_Free = DynamicsSupportEulrate_Kino(SRB_param, "Free");
-SRBFuncs_Redundant = DynamicsSupportEulrate_Kino(SRB_param, "Hybrid_Redundant");
-SRBFuncs_Compact = DynamicsSupportEulrate_Kino(SRB_param, "Hybrid_Compact");
+% SRBFuncs_Free = DynamicsSupportEulrate_Kino(SRB_param, "Free");
+% SRBFuncs_Redundant = DynamicsSupportEulrate_Kino(SRB_param, "Hybrid_Redundant");
+% SRBFuncs_Compact = DynamicsSupportEulrate_Kino(SRB_param, "Hybrid_Compact");
+SRBFuncs_Free = DynamicsSupportAngularVel_Kino(SRB_param, "Free");
+SRBFuncs_Redundant = DynamicsSupportAngularVel_Kino(SRB_param, "Hybrid_Redundant");
+SRBFuncs_Compact = DynamicsSupportAngularVel_Kino(SRB_param, "Hybrid_Compact");
 
 %% Check with finite difference
 pos = rand(3,1);

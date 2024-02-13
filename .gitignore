@@ -2,3 +2,4 @@ CasADiPath.mat
 SpatialV2Path.mat
 *.asv
 *.DS_store
+*.mex*

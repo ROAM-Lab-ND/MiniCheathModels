@@ -49,10 +49,9 @@ for i = 1:3
     end
 end
 %% Dynamics
-R_body = eul2Rot(eul);        % orientation of body w.r.t. global frame
-% disp(name); name = World_R_Body
+R_body = eul2Rot(eul); % orientation of body w.r.t. global frame (World_R_Body)
 R_world = R_body.';
-Rwdot = SX.zeros(3, 3);
+Rwdot = SX.zeros(3, 3); % Seems not used
 for i = 1:3
     for j = 1:3
         Rwdot(i, j) = jacobian(R_world(i, j), eul) * euldot;

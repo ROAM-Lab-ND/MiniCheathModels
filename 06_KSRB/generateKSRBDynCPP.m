@@ -12,8 +12,9 @@ modes = ["Free" , "Hybrid_Redundant" , "Hybrid_Compact"];
 names = ["Free" , "Redundant" , "Compact"];
 for i = 1:3
     fprintf("Generating Kino-SRB dynamics mode: %s...\n", names(i));
-    %% Compute dynamics
-    SRBFuncs = DynamicsSupportEulrate_Kino(SRB_param,modes(i));
+    %% Compute dynamics please choose the parameterization type
+    % SRBFuncs = DynamicsSupportEulrate_Kino(SRB_param,modes(i));
+    SRBFuncs = DynamicsSupportAngularVel_Kino(SRB_param,modes(i));
 
     %% Generate configuration file
     config.xsize = SRBFuncs.xlength;
